@@ -32,6 +32,9 @@ class MainActivity : AppCompatActivity() {
     lateinit var supportFrag : FragmentTransaction
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if(savedInstanceState!=null){
+            listTasks = savedInstanceState.getSerializable("listTasks") as ArrayList<Task>
+        }
         setContentView(R.layout.activity_main)
 
 
@@ -124,13 +127,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-
-        try {
-            Toast.makeText(applicationContext, listTasksNotDone[0], Toast.LENGTH_SHORT).show()
-        } catch (e:Exception){
-
-        }
-
         var b = Bundle()
         b.putStringArrayList("tasks",listTasksNotDone)
         list_fragment.arguments = b
@@ -216,6 +212,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         list_fragment.update()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putSerializable("listTasks",listTasks as Serializable)
+        super.onSaveInstanceState(outState)
     }
 
 }
