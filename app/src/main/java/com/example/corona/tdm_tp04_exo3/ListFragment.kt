@@ -44,7 +44,7 @@ class ListFragment : Fragment() {
         )
         mListView.adapter = adptee
         mListView.setOnItemClickListener { adapterView, view, i, l ->
-            (context as MainActivity).deleteTask(i)
+            (context as MainActivity).deleteTask(tasks[i])
 
         }
     }

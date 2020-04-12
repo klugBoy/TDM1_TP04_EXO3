@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         init()
 
 
-        if (resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK == Configuration.SCREENLAYOUT_SIZE_LARGE ) {
+        if (resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK >= Configuration.SCREENLAYOUT_SIZE_LARGE ) {
             // on a large screen device ...
 
 
@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
                     weekFilter()
                 }
                 all.setOnClickListener {
-                    update()
+                    allFilter()
                 }
             } else {
                 // In portrait
@@ -69,7 +69,6 @@ class MainActivity : AppCompatActivity() {
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                     // Apply the adapter to the spinner
                     spinner.adapter = adapter
-                    spinner.setSelection(2)
                     spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                         override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                             when (spinner.selectedItem) {
@@ -80,7 +79,7 @@ class MainActivity : AppCompatActivity() {
                                     weekFilter()
                                 }
                                 "All" -> {
-                                    update()
+                                    allFilter()
                                 }
                             }
 
@@ -102,7 +101,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun addTask(task: Task){
-        listTasks.add(task)
+        var found = false
+        for (i in listTasks){
+            if(task.name == i.name ) {
+                    found=true
+                    break
+
+            }
+
+        }
+        if(!found) listTasks.add(task)
 
         update()
 
@@ -111,7 +119,7 @@ class MainActivity : AppCompatActivity() {
     fun init(){
 
         for (i in listTasks){
-            if(i.done == false){
+            if(i.done == false && isToday(i.deadline!!,Calendar.getInstance()) ){
                 listTasksNotDone.add(i.name!!)
             }
         }
@@ -132,7 +140,7 @@ class MainActivity : AppCompatActivity() {
     fun update(){
         listTasksNotDone.clear()
         for (i in listTasks){
-            if(i.done == false){
+            if(i.done == false  && isToday(i.deadline!!,Calendar.getInstance())){
                 listTasksNotDone.add(i.name!!)
             }
         }
@@ -141,8 +149,14 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun deleteTask(task: Int){
-        listTasks.remove(listTasks.get(task))
+    fun deleteTask(task: String){
+        for (i in listTasks){
+            if(task == i.name) {
+                listTasks.remove(i)
+                break
+            }
+
+        }
         update()
     }
 
@@ -186,6 +200,17 @@ class MainActivity : AppCompatActivity() {
         listTasksNotDone.clear()
         for (i in listTasks) {
             if (i.done == false && isCurrentWeekDateSelect(i.deadline!!)) {
+                listTasksNotDone.add(i.name!!)
+            }
+        }
+
+        list_fragment.update()
+    }
+
+    fun allFilter(){
+        listTasksNotDone.clear()
+        for (i in listTasks) {
+            if (i.done == false) {
                 listTasksNotDone.add(i.name!!)
             }
         }

@@ -41,7 +41,7 @@ class AddFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        addField.setOnEditorActionListener { textView, i, keyEvent ->
+        addbtn.setOnClickListener {
             var cal = Calendar.getInstance()
             task = Task(addField.text.toString(),cal,null)
             var year = cal.get(Calendar.YEAR)
