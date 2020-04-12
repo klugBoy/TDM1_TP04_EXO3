@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">TDM_TP04_EXO3</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="options_array">
+        <item>Today</item>
+        <item>This week</item>
+        <item>All</item>
+    </string-array>
+</resources>

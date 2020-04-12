@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_weight="2"
+                  android:orientation="vertical"
+                  android:gravity="center"
+    >
+        <FrameLayout android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:paddingVertical="50dp"
+                     android:id="@+id/today"
+                     android:clickable="true"
+
+        >
+            <TextView android:gravity="center"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:text="Today"/>
+        </FrameLayout>
+        <FrameLayout android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                        android:paddingVertical="50dp"
+                     android:id="@+id/week"
+                     android:clickable="true"
+
+        >
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:text="This week"
+            android:gravity="center"/>
+        </FrameLayout>
+        <FrameLayout android:layout_width="match_parent"
+                     android:paddingVertical="50dp"
+                     android:layout_height="wrap_content"
+                     android:id="@+id/all"
+                     android:clickable="true"
+        >
+
+                <TextView android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:text="All"
+                          android:gravity="center"/>
+        </FrameLayout>
+
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                android:layout_weight="1"
+                  android:orientation="vertical"
+    >
+
+        <FrameLayout android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:id="@+id/addBar"
+                     android:layout_weight="3"
+
+        >
+
+        </FrameLayout>
+
+        <FrameLayout android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:id="@+id/listTasks"
+                     android:layout_weight="1"
+
+        >
+
+        </FrameLayout>
+    </LinearLayout>
+
+
+</LinearLayout>
